@@ -38,11 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'home',
-    
+    'basic_auth',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -50,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'basic_auth.middleware.AuthMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -71,8 +75,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
-
-
+ASGI_APPLICATION = 'mysite.asgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
@@ -127,3 +130,13 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOWED_ORIGINS = ["http://localhost:8000", "http://127.0.0.1:8000",]
+
+
+# Log monitor settings
+LOG_MONITOR_ROOT_DIR = "C:/Users/sreer/Documents/interns/log_monitor/sample_logs"
+
+# Expecting end of the eeach line as mesage
+LOG_STRUCTURE_LIST = ['timestamp', 'application_name', 'log_level']

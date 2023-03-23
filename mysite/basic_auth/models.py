@@ -7,20 +7,13 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 
-class log(models.Model):
-    timestamp = models.DateTimeField()
-    application_name = models.CharField(max_length=20)
-    level = models.CharField(max_length=10, blank=True, null=True)
-    message = models.TextField(blank=True, null=True)
-    handled_by = models.CharField(max_length=50, blank=True, null=True)
-    handled_time = models.DateTimeField(blank=True, null=True)
-    comment = models.TextField(blank=True, null=True)
+
+class User(models.Model):
+    email = models.CharField(unique=True, max_length=45)
+    name = models.CharField(max_length=20)
+    hashed_password = models.TextField()
 
     class Meta:
         managed = False
-        db_table = 'log'
-
-
-
-
-
+        db_table = 'user'
+        unique_together = (('id', 'email'),)
